@@ -24,6 +24,7 @@ function AddSubscriptionForm() {
   return (
     <form onSubmit={handleSubmit}>
       <input
+        class = "h-10 pl-4 mr-4 outline-lime-200 outline-solid rounded-md"
         name="name"
         placeholder="Name"
         value={form.name}
@@ -31,6 +32,7 @@ function AddSubscriptionForm() {
         required
       />
       <input
+        class = "h-10 pl-4 mr-4 outline-lime-200 outline-solid rounded-md" 
         name="price"
         placeholder="Price"
         value={form.price}
@@ -38,14 +40,15 @@ function AddSubscriptionForm() {
         required
       />
       <input
+        class = "h-10 pl-4 mr-4 outline-lime-200 outline-solid rounded-md"
         name="renewal_date"
-        placeholder="Renewal Date (YYYY-MM-DD)"
+        placeholder="(YYYY-MM-DD)"
         value={form.renewal_date}
         onChange={handleChange}
         required
         
       />
-      <button type="submit">Add Subscription</button>
+      <button type="submit" class="mx-4 focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">Add Subscription</button>
     </form>
   );
 }

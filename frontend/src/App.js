@@ -13,7 +13,7 @@ function App() {
       {/* App Container */}
       <div className="w-full max-w-4xl bg-white shadow-lg rounded-2xl p-8">
         {/* Add Subscription Form */}
-        <div className="mb-10 border-b border-gray-200 pb-6">
+        <div className="mb-6 border-b border-gray-200 pb-4">
           <h2 className="text-2xl font-semibold text-gray-800 mb-4">
             Add New Subscription
           </h2>
