@@ -12,7 +12,6 @@ function SubscriptionList() {
 
   return (
     <div>
-      <h2>My Subscriptions</h2>
       <ul>
         {subscriptions.map((sub) => (
           <li key={sub.id}>

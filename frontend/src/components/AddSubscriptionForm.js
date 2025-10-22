@@ -43,6 +43,7 @@ function AddSubscriptionForm() {
         value={form.renewal_date}
         onChange={handleChange}
         required
+        
       />
       <button type="submit">Add Subscription</button>
     </form>
