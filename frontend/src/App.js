@@ -56,8 +56,8 @@ function App() {
               ×
             </button>
 
-            <h2 class="text-2xl font-semibold text-gray-800 mb-4 text-center">
-              Add New Subscription
+            <h2 class="text-2xl font-semibold text-purple-600 mb-4 text-center">
+              New Subscription
             </h2>
 
             <AddSubscriptionForm onAdd={handleAdd} />

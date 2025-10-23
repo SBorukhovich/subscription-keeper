@@ -36,25 +36,28 @@ function AddSubscriptionForm({onAdd}) {
 
   return (
     <form  onSubmit={handleSubmit}>
-      <div class="flex flex-col items-center px-4">
+      <div class="flex flex-col x-4">
+      <label class="mb-2 ">Name</label>
       <input
-        class = "h-10 pl-4 mr-4 mb-4 outline-lime-200 outline-solid outline-2 rounded-md"
+        class = "text-slate-600 bg-gray-100 w-full h-10 pl-2 mr-4 mb-4  text-sm rounded-md"
         name="name"
-        placeholder="Name"
+        placeholder="Amazon"
         value={form.name}
         onChange={handleChange}
         required
       />
+      <label class="mb-2 ">Price</label>
       <input
-        class = "h-10 pl-4 mr-4 mb-4 outline-lime-200 outline-solid outline-2 rounded-md" 
+        class = "text-slate-600 h-10 mr-4 mb-4 pl-2 bg-gray-100 w-full text-sm rounded-md" 
         name="price"
-        placeholder="Price"
+        placeholder="14.99"
         value={form.price}
         onChange={handleChange}
         required
       />
+      <label class="mb-2 ">Renewal Date</label>
       <input
-        class = "h-10 pl-4 mr-4 mb-4 outline-lime-200 outline-solid outline-2 rounded-md"
+        class = "text-slate-600 h-10 mr-4 mb-4 pl-2 w-full bg-gray-100 text-sm rounded-md"
         name="renewal_date"
         placeholder="(YYYY-MM-DD)"
         value={form.renewal_date}
@@ -62,7 +65,8 @@ function AddSubscriptionForm({onAdd}) {
         required
         
       />
-      <button type="submit" class="mx-4 focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">Add</button>
+      <button type="submit" class="p-0 mx-30 focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">
+        Add</button>
     </div>
     </form>
   );
