@@ -9,17 +9,6 @@ function AddSubscriptionForm({onAdd}) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // fetch("http://127.0.0.1:8000/subscriptions", {
-    //   method: "POST",
-    //   headers: { "Content-Type": "application/json" },
-    //   body: JSON.stringify(form),
-    // })
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     alert(`Added: ${data.data.name}`);
-    //     setForm({ name: "", price: "", renewal_date: "" });
-    //   });
-
     try {
       const response = await fetch("http://127.0.0.1:8000/subscriptions", {
         method: "POST",
@@ -46,9 +35,10 @@ function AddSubscriptionForm({onAdd}) {
   };
 
   return (
-    <form class="px-4" onSubmit={handleSubmit}>
+    <form  onSubmit={handleSubmit}>
+      <div class="flex flex-col items-center px-4">
       <input
-        class = "h-10 pl-4 mr-4 outline-lime-200 outline-solid rounded-md"
+        class = "h-10 pl-4 mr-4 mb-4 outline-lime-200 outline-solid outline-2 rounded-md"
         name="name"
         placeholder="Name"
         value={form.name}
@@ -56,7 +46,7 @@ function AddSubscriptionForm({onAdd}) {
         required
       />
       <input
-        class = "h-10 pl-4 mr-4 outline-lime-200 outline-solid rounded-md" 
+        class = "h-10 pl-4 mr-4 mb-4 outline-lime-200 outline-solid outline-2 rounded-md" 
         name="price"
         placeholder="Price"
         value={form.price}
@@ -64,7 +54,7 @@ function AddSubscriptionForm({onAdd}) {
         required
       />
       <input
-        class = "h-10 pl-4 mr-4 outline-lime-200 outline-solid rounded-md"
+        class = "h-10 pl-4 mr-4 mb-4 outline-lime-200 outline-solid outline-2 rounded-md"
         name="renewal_date"
         placeholder="(YYYY-MM-DD)"
         value={form.renewal_date}
@@ -73,6 +63,7 @@ function AddSubscriptionForm({onAdd}) {
         
       />
       <button type="submit" class="mx-4 focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">Add</button>
+    </div>
     </form>
   );
 }
