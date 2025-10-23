@@ -17,6 +17,7 @@ function AddSubscriptionForm({onAdd}) {
           name: form.name,
           price: parseFloat(form.price),
           renewal_date: form.renewal_date,
+          color: form.color,
         }),
       });
 
@@ -26,7 +27,7 @@ function AddSubscriptionForm({onAdd}) {
 
       const newSub = await response.json();
       onAdd(newSub); // Update the list in parent
-      setForm({ name: "", price: "", renewal_date: "" });
+      setForm({ name: "", price: "", renewal_date: "", color:"" });
     } catch (error) {
       console.error(error);
       alert("Error adding subscription.");
@@ -63,8 +64,18 @@ function AddSubscriptionForm({onAdd}) {
         value={form.renewal_date}
         onChange={handleChange}
         required
-        
       />
+       {/* 👇 Color Picker */}
+      <div class="mb-4 flex items-center gap-2">
+        <label class="text-sm text-gray-700">Tag Color:</label>
+        <input
+          type="color"
+          name="color"
+          value={form.color}
+          onChange={handleChange}
+          class="w-10 h-10  cursor-pointer "
+        />
+      </div>
       <button type="submit" class="p-0 mx-30 focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">
         Add</button>
     </div>

@@ -34,6 +34,7 @@ class Subscription(SQLModel, table=True):
     name: str
     price: float
     renewal_date: str
+    color: str
 
 
 @app.on_event("startup")

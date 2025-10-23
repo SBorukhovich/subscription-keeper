@@ -12,9 +12,9 @@ function App() {
   };
   
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col items-center py-10 px-4">
+    <div className="min-h-screen bg-[#201537] flex flex-col items-center py-10 px-4">
       {/* Header */}
-      <h1 className="text-4xl font-bold text-blue-600 mb-8 text-center">
+      <h1 className="text-4xl font-bold text-[#bbf451] mb-8 text-center">
         Subscription Keeper
       </h1>
 
@@ -25,13 +25,13 @@ function App() {
 
         {/* Subscription List */}
         <div>
-          <h2 className="text-2xl font-semibold text-gray-800 m-4">
+          <h2 className="text-2xl font-semibold text-[#201537] m-4">
             My Subscriptions
           </h2>
           <SubscriptionList refresh={refresh} />
            <button
             onClick={() => setShowModal(true)}
-            class="m-4 text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5"
+            class="m-4 text-black bg-[#bbf451] hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text px-5 py-2.5"
           >+ Add</button>
         </div>
         </div>
