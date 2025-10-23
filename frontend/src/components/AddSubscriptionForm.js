@@ -1,28 +1,52 @@
 import React, { useState } from "react";
 
-function AddSubscriptionForm() {
+function AddSubscriptionForm({onAdd}) {
   const [form, setForm] = useState({ name: "", price: "", renewal_date: "" });
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    fetch("http://127.0.0.1:8000/subscriptions", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(form),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        alert(`Added: ${data.data.name}`);
-        setForm({ name: "", price: "", renewal_date: "" });
+    // fetch("http://127.0.0.1:8000/subscriptions", {
+    //   method: "POST",
+    //   headers: { "Content-Type": "application/json" },
+    //   body: JSON.stringify(form),
+    // })
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     alert(`Added: ${data.data.name}`);
+    //     setForm({ name: "", price: "", renewal_date: "" });
+    //   });
+
+    try {
+      const response = await fetch("http://127.0.0.1:8000/subscriptions", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: form.name,
+          price: parseFloat(form.price),
+          renewal_date: form.renewal_date,
+        }),
       });
+
+      if (!response.ok) {
+        throw new Error("Failed to add subscription");
+      }
+
+      const newSub = await response.json();
+      onAdd(newSub); // Update the list in parent
+      setForm({ name: "", price: "", renewal_date: "" });
+    } catch (error) {
+      console.error(error);
+      alert("Error adding subscription.");
+    }
+
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form class="px-4" onSubmit={handleSubmit}>
       <input
         class = "h-10 pl-4 mr-4 outline-lime-200 outline-solid rounded-md"
         name="name"
@@ -48,7 +72,7 @@ function AddSubscriptionForm() {
         required
         
       />
-      <button type="submit" class="mx-4 focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">Add Subscription</button>
+      <button type="submit" class="mx-4 focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">Add</button>
     </form>
   );
 }

@@ -1,8 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import SubscriptionList from "./components/SubscriptionList";
 import AddSubscriptionForm from "./components/AddSubscriptionForm";
 
 function App() {
+  const [refresh, setRefresh] = useState(false);
+
+  const handleAdd = () => {
+    setRefresh(!refresh); // toggle refresh flag to reload list
+  };
+  
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col items-center py-10 px-4">
       {/* Header */}
@@ -15,9 +21,9 @@ function App() {
         {/* Add Subscription Form */}
         <div className="mb-6 border-b border-gray-200 pb-4">
           <h2 className="text-2xl font-semibold text-gray-800 mb-4">
-            Add New Subscription
+            New Subscription
           </h2>
-          <AddSubscriptionForm />
+          <AddSubscriptionForm onAdd={handleAdd} />
         </div>
 
         {/* Subscription List */}
@@ -25,7 +31,7 @@ function App() {
           <h2 className="text-2xl font-semibold text-gray-800 mb-4">
             My Subscriptions
           </h2>
-          <SubscriptionList />
+          <SubscriptionList refresh={refresh} />
         </div>
       </div>
     </div>

@@ -1,27 +1,27 @@
 import React, { useEffect, useState } from "react";
 
-function SubscriptionList() {
+function SubscriptionList({refresh}) {
   const [subscriptions, setSubscriptions] = useState([]);
 
+  // useEffect(() => {
+  //   fetch("http://127.0.0.1:8000/subscriptions")
+  //     .then((res) => res.json())
+  //     .then((data) => setSubscriptions(data))
+  //     .catch((err) => console.error("Error fetching subscriptions:", err));
+  // }, []);
+ const fetchSubscriptions = async () => {
+   try {
+    const response = await fetch("http://127.0.0.1:8000/subscriptions");
+    const data = await response.json();
+    setSubscriptions(data);
+  } catch (error) {
+    console.error("Failed to fetch:", error);
+  }
+ }
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/subscriptions")
-      .then((res) => res.json())
-      .then((data) => setSubscriptions(data))
-      .catch((err) => console.error("Error fetching subscriptions:", err));
-  }, []);
+    fetchSubscriptions();
+  }, [refresh]); // re-fetch when new sub is added
 
-//   return (
-//     <div>
-//       <ul>
-//         {subscriptions.map((sub) => (
-//           <li key={sub.id}>
-//             {sub.name} — ${sub.price} (Renews on {sub.renewal_date})
-//           </li>
-//         ))}
-//       </ul>
-//     </div>
-//   );
-// }
 return (
     <div className="space-y-3">
       <ul className="divide-y divide-gray-200">
