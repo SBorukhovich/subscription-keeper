@@ -34,6 +34,7 @@ function AddSubscriptionForm({onAdd}) {
     }
 
   };
+  
 
   return (
     <form  onSubmit={handleSubmit}>
@@ -65,7 +66,7 @@ function AddSubscriptionForm({onAdd}) {
         onChange={handleChange}
         required
       />
-       {/* 👇 Color Picker */}
+       {/*  Color Picker */}
       <div class="mb-4 flex items-center gap-2">
         <label class="text-sm text-gray-700">Tag Color:</label>
         <input

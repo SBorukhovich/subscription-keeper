@@ -12,7 +12,7 @@ function App() {
   };
   
   return (
-    <div className="min-h-screen bg-[#201537] flex flex-col items-center py-10 px-4">
+    <div className="min-h-screen bg-[#241E4E] flex flex-col items-center py-10 px-4">
       {/* Header */}
       <h1 className="text-4xl font-bold text-[#bbf451] mb-8 text-center">
         Subscription Keeper
@@ -31,14 +31,14 @@ function App() {
           <SubscriptionList refresh={refresh} />
            <button
             onClick={() => setShowModal(true)}
-            class="m-4 text-black bg-[#bbf451] hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text px-5 py-2.5"
+            class="m-4 text-black bg-[#bbf451] hover:bg-[#aae340] focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text px-5 py-2.5"
           >+ Add</button>
         </div>
         </div>
 
       {/* Add Subscription Modal */}
       {showModal && (
-        // 👇 FADE-IN BACKDROP
+        // FADE-IN BACKDROP
         <div
           class="fixed inset-0 bg-[rgba(0,0,0,0.54)] bg-opacity-25 flex justify-center items-center z-50 transition-opacity duration-300 ease-out opacity-100"
           onClick={() => setShowModal(false)}

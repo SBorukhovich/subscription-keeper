@@ -63,3 +63,33 @@ def add_subscription(subscription: Subscription):
         session.commit()
         session.refresh(subscription)
         return subscription
+
+@app.put("/subscriptions/{subscription_id}")
+def update_subscription(subscription_id: int, updated_data: Subscription):
+    with Session(engine) as session:
+        existing = session.get(Subscription, subscription_id)
+        
+        # Update only fields that are provided
+        if updated_data.name:
+            existing.name = updated_data.name
+        if updated_data.price:
+            existing.price = updated_data.price
+        if updated_data.renewal_date:
+            existing.renewal_date = updated_data.renewal_date
+        if updated_data.color:
+            existing.color = updated_data.color
+
+        session.add(existing)
+        session.commit()
+        session.refresh(existing)
+        return existing
+
+
+@app.delete("/subscriptions/delete/{subscription_id}")
+def delete_subscription(subscription_id: int):
+    with Session(engine) as session:
+        subscription = session.get(Subscription, subscription_id)
+        
+        session.delete(subscription)
+        session.commit()
+        return {"message": "Subscription deleted successfully."}
