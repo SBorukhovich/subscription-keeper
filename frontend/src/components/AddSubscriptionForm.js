@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 function AddSubscriptionForm({onAdd}) {
-  const [form, setForm] = useState({ name: "", price: "", renewal_date: "" });
+  const [form, setForm] = useState({ name: "", price: "", renewal_date: "", color: "#9CA3AF"});
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -59,9 +59,9 @@ function AddSubscriptionForm({onAdd}) {
       />
       <label class="mb-2 ">Renewal Date</label>
       <input
-        class = "text-slate-600 h-10 mr-4 mb-4 pl-2 w-full bg-gray-100 text-sm rounded-md"
+        class="text-slate-600 h-10 mr-4 mb-4 px-2 bg-gray-100 w-full text-sm rounded-md"        
+        type="date"
         name="renewal_date"
-        placeholder="(YYYY-MM-DD)"
         value={form.renewal_date}
         onChange={handleChange}
         required

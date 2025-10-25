@@ -29,26 +29,25 @@ function App() {
             My Subscriptions
           </h2>
           <SubscriptionList refresh={refresh} />
+          <div class="flex flex-row-reverse">
            <button
             onClick={() => setShowModal(true)}
             class="m-4 text-black bg-[#bbf451] hover:bg-[#aae340] focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text px-5 py-2.5"
           >+ Add</button>
+       </div>
         </div>
         </div>
 
-      {/* Add Subscription Modal */}
+      {/* Add New Subsciption Window*/}
       {showModal && (
-        // FADE-IN BACKDROP
         <div
           class="fixed inset-0 bg-[rgba(0,0,0,0.54)] bg-opacity-25 flex justify-center items-center z-50 transition-opacity duration-300 ease-out opacity-100"
           onClick={() => setShowModal(false)}
         >
-          {/* 👇 POPUP CONTAINER WITH SCALE/FADE ANIMATION */}
           <div
             class="bg-white rounded-2xl shadow-lg p-6 w-full max-w-md relative transform transition-all duration-300 ease-out scale-100 opacity-100"
             onClick={(e) => e.stopPropagation()} // prevent closing when clicking inside
           >
-            {/* Close button */}
             <button
               onClick={() => setShowModal(false)}
               class="absolute top-3 right-3 text-gray-600 hover:text-gray-900 text-xl font-bold"
