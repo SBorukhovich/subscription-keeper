@@ -31,6 +31,7 @@ engine = create_engine(DATABASE_URL, echo=True)
 
 class Subscription(SQLModel, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
+    user_id: str    # firebase UID
     name: str
     price: float
     renewal_date: str
@@ -49,10 +50,10 @@ def read_root():
     return {"message": "Connected to MySQL successfully!"}
 
 
-@app.get("/subscriptions")
-def get_subscriptions():
+@app.get("/subscriptions/{user_id}")
+def get_subscriptions(user_id: str):
     with Session(engine) as session:
-        subscriptions = session.query(Subscription).all()
+        subscriptions = session.query(Subscription).filter(Subscription.user_id == user_id).all()
         return subscriptions
 
 
@@ -68,7 +69,13 @@ def add_subscription(subscription: Subscription):
 def update_subscription(subscription_id: int, updated_data: Subscription):
     with Session(engine) as session:
         existing = session.get(Subscription, subscription_id)
-        
+
+        if not existing:
+            return {"error": "Subscription not found."}
+
+        if updated_data.user_id != existing.user_id:
+            return {"error": "Unauthorized to edit this subscription."}
+
         # Update only fields that are provided
         if updated_data.name:
             existing.name = updated_data.name
@@ -86,9 +93,14 @@ def update_subscription(subscription_id: int, updated_data: Subscription):
 
 
 @app.delete("/subscriptions/delete/{subscription_id}")
-def delete_subscription(subscription_id: int):
+def delete_subscription(subscription_id: int, user_id: str):
     with Session(engine) as session:
         subscription = session.get(Subscription, subscription_id)
+        
+        if not subscription:
+            return {"error": "Subscription not found."}
+        if subscription.user_id != user_id:
+            return {"error": "Unauthorized to delete this subscription."}
         
         session.delete(subscription)
         session.commit()

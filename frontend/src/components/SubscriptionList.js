@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from "react";
 import SubscriptionPage from "./SubscriptionPage";
+import { useAuth } from "./AuthContext";
 
 
 function SubscriptionList({refresh}) {
+  const { user } = useAuth();
   const [subscriptions, setSubscriptions] = useState([]);
   const [selectedSub, setSelectedSub] = useState(null);
 
 
  const fetchSubscriptions = async () => {
    try {
-    const response = await fetch("http://127.0.0.1:8000/subscriptions");
+    const response = await fetch(`http://127.0.0.1:8000/subscriptions/${user.uid}`);
     const data = await response.json();
     setSubscriptions(data);
   } catch (error) {
@@ -21,7 +23,7 @@ function SubscriptionList({refresh}) {
   }, [refresh]); // re-fetch when new sub is added
 
   const handleDelete = async (id) => {
-    await fetch(`http://127.0.0.1:8000/subscriptions/delete/${id}`, { method: "DELETE" });
+  await fetch(`http://127.0.0.1:8000/subscriptions/delete/${id}?user_id=${user.uid}`, {method: "DELETE",})
     setSelectedSub(null);
     fetchSubscriptions();
   };

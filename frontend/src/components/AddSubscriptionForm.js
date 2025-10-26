@@ -1,6 +1,9 @@
 import React, { useState } from "react";
+import { useAuth } from "./AuthContext";
+
 
 function AddSubscriptionForm({onAdd}) {
+  const { user } = useAuth();
   const [form, setForm] = useState({ name: "", price: "", renewal_date: "", color: "#9CA3AF"});
 
   const handleChange = (e) => {
@@ -18,6 +21,7 @@ function AddSubscriptionForm({onAdd}) {
           price: parseFloat(form.price),
           renewal_date: form.renewal_date,
           color: form.color,
+          user_id: user.uid,
         }),
       });
 
