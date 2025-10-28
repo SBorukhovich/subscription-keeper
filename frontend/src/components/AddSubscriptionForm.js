@@ -4,7 +4,7 @@ import { useAuth } from "./AuthContext";
 
 function AddSubscriptionForm({onAdd}) {
   const { user } = useAuth();
-  const [form, setForm] = useState({ name: "", price: "", renewal_date: "", color: "#9CA3AF"});
+  const [form, setForm] = useState({ name: "", price: "", renewal_date: "", color: "#9CA3AF", isMonthly: "true", automatic_renewal: "true", notes: "" });
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -22,6 +22,9 @@ function AddSubscriptionForm({onAdd}) {
           renewal_date: form.renewal_date,
           color: form.color,
           user_id: user.uid,
+          isMonthly: form.isMonthly === "true",
+          automatic_renewal: form.automatic_renewal === "true",
+          notes: form.notes,
         }),
       });
 
@@ -31,7 +34,7 @@ function AddSubscriptionForm({onAdd}) {
 
       const newSub = await response.json();
       onAdd(newSub); // Update the list in parent
-      setForm({ name: "", price: "", renewal_date: "", color:"" });
+      setForm({ name: "", price: "", renewal_date: "", color:"", isMonthly: "true", automatic_renewal: "true", notes: "" }); 
     } catch (error) {
       console.error(error);
       alert("Error adding subscription.");
@@ -69,6 +72,70 @@ function AddSubscriptionForm({onAdd}) {
         value={form.renewal_date}
         onChange={handleChange}
         required
+      />
+      {/* Renewal Type */}
+        <fieldset className="mb-4">
+          <legend className="text-sm text-gray-700 mb-2">Renewal Type</legend>
+          <div className="flex items-center gap-6">
+            <label className="inline-flex items-center gap-2">
+              <input
+                type="radio"
+                name="automatic_renewal"
+                value="true"
+                checked={form.automatic_renewal === "true"}
+                onChange={handleChange}
+                className="h-4 w-4"
+              />
+              <span className="text-sm text-gray-700">Automatic</span>
+            </label>
+            <label className="inline-flex items-center gap-2">
+              <input
+                type="radio"
+                name="automatic_renewal"
+                value="false"
+                checked={form.automatic_renewal === "false"}
+                onChange={handleChange}
+                className="h-4 w-4"
+              />
+              <span className="text-sm text-gray-700">Manual</span>
+            </label>
+          </div>
+        </fieldset> 
+
+        {/* Billing Cycle */}
+        <fieldset className="mb-4">
+          <legend className="text-sm text-gray-700 mb-2">Billing Cycle</legend>
+          <div className="flex items-center gap-6">
+            <label className="inline-flex items-center gap-2">
+              <input
+                type="radio"
+                name="isMonthly"
+                value="true"
+                checked={form.isMonthly === "true"}
+                onChange={handleChange}
+                className="h-4 w-4"
+              />
+              <span className="text-sm text-gray-700">Monthly</span>
+            </label>
+            <label className="inline-flex items-center gap-2">
+              <input
+                type="radio"
+                name="isMonthly"
+                value="false"
+                checked={form.isMonthly === "false"}
+                onChange={handleChange}
+                className="h-4 w-4"
+              />
+              <span className="text-sm text-gray-700">Annual</span>
+            </label>
+          </div>
+        </fieldset>
+        <label class="mb-2 ">Notes</label>
+        <textarea
+          class="text-slate-600 bg-gray-100 w-full h-20 pl-2 mr-4 mb-4 text-sm rounded-md"
+          name="notes"
+          value={form.notes}
+          onChange={handleChange}
       />
        {/*  Color Picker */}
       <div class="mb-4 flex items-center gap-2">
