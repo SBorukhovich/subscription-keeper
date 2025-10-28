@@ -36,6 +36,10 @@ class Subscription(SQLModel, table=True):
     price: float
     renewal_date: str
     color: str
+    automatic_renewal: Optional[bool] = Field(default=False)
+    isMonthly: Optional[bool] = Field(default=True)
+    isYearly: Optional[bool] = Field(default=False)
+    notes: Optional[str] = Field(default=None)
 
 
 @app.on_event("startup")
