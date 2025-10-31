@@ -3,11 +3,14 @@ import SubscriptionList from "../components/SubscriptionList";
 import AddSubscriptionForm from "../components/AddSubscriptionForm";
 import SubscriptionPageStatistic from "./SubscriptionPageStatistic";
 import { useAuth } from "./AuthContext";       
+
      
 export default function SubscriptionsPage() {
   const { user } = useAuth();
   const [refresh, setRefresh] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const currentDate = new Date();
+  const currentMonthName = currentDate.toLocaleString('en-US', { month: 'long' });
 
   const handleAdd = () => {
     setRefresh(!refresh);
@@ -18,7 +21,7 @@ export default function SubscriptionsPage() {
     <div class="flex w-full">
     <main className="flex-1 bg-[#F7F8FC] text-gray-800 p-10 rounded-l-3xl flex justify-center items-center">
     <div className="w-full max-w-2xl h-[85vh] rounded-2xl flex flex-col">
-      <div className="flex justify-between p-4">
+      <div className="flex justify-between px-4 pt-4">
         <h2 className="text-2xl font-semibold text-[#201537]">
           My Subscriptions
         </h2>
@@ -28,8 +31,10 @@ export default function SubscriptionsPage() {
         >
           + Add
         </button>
+        
       </div>
-
+      <p className="pl-4 text-left text-md text-gray-600 ">{currentMonthName + " " + currentDate.getFullYear()}</p>
+    
       <div className="flex-1 overflow-y-auto px-4 pb-4">
         <SubscriptionList refresh={refresh} />
       </div>
