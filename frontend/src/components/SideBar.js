@@ -1,8 +1,30 @@
-import { Routes, Route, Link } from "react-router-dom";
-import Subscriptions from "./SubscriptionsPage";
-import Dashboard from "./DashboardPage";
+import { Link, useLocation } from "react-router-dom";
+
+import { auth } from "../firebase";
+import { signOut } from "firebase/auth";
+
+const handleSignOut = async () => {
+    try {
+      await signOut(auth);
+      console.log("User signed out");
+    } catch (error) {
+      console.error("Error signing out:", error);
+    }
+  }
 
 export default function SideBar(user) {
+  const location = useLocation();
+  const path = location.pathname || "/";
+
+  const isActive = (p) => {
+    // treat "/" as dashboard
+    if (p === "/dashboard" && (path === "/" || path === "/dashboard")) return true;
+    return path === p;
+  };
+
+  const activeClass = "text-xl font-semibold text-white";
+  const inactiveClass = "text-xl font-medium text-gray-400 hover:text-white transition";
+
   return (
      <aside className=" w-1/6 mx-6 flex flex-col justify-between">
       <p>
@@ -17,14 +39,18 @@ export default function SideBar(user) {
           </div>
 
           <nav className="mt-16 flex flex-col space-y-4 text-gray-400">
-            <p className="text-xl font-medium hover:text-white transition">Dashboard</p>
-            <p className="text-xl font-semibold text-white">Subscriptions</p>
+          <Link to="/dashboard" className={isActive("/dashboard") ? activeClass : inactiveClass}>
+            Dashboard
+          </Link>
+          <Link to="/subscriptions" className={isActive("/subscriptions") ? activeClass : inactiveClass}>
+            Subscriptions
+          </Link>
           </nav>
-          <div class=" h-full place-content-end items-center">
-          <button
-         
-         className="text-white hover:bg-red-600 p-1 rounded"
-         >Sign Out
+          <div className="h-full place-content-end items-center">
+        <button 
+         onClick={handleSignOut} 
+          className="text-white hover:bg-red-600 p-1 rounded">
+          Sign Out
         </button>
         </div> 
     
