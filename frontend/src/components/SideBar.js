@@ -17,8 +17,8 @@ export default function SideBar(user) {
   const path = location.pathname || "/";
 
   const isActive = (p) => {
-    // treat "/" as dashboard
-    if (p === "/dashboard" && (path === "/" || path === "/dashboard")) return true;
+    // treat "/" as subscriptions
+    if (p === "/subscriptions" && (path === "/" || path === "/subscriptions")) return true;
     return path === p;
   };
 
@@ -39,12 +39,13 @@ export default function SideBar(user) {
           </div>
 
           <nav className="mt-16 flex flex-col space-y-4 text-gray-400">
-          <Link to="/dashboard" className={isActive("/dashboard") ? activeClass : inactiveClass}>
-            Dashboard
-          </Link>
           <Link to="/subscriptions" className={isActive("/subscriptions") ? activeClass : inactiveClass}>
             Subscriptions
           </Link>
+          <Link to="/dashboard" className={isActive("/dashboard") ? activeClass : inactiveClass}>
+            Dashboard
+          </Link>
+          
           </nav>
           <div className="h-full place-content-end items-center">
         <button 
