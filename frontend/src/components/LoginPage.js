@@ -1,16 +1,15 @@
 import React, { useState } from "react";
-import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+import { signInWithEmailAndPassword, signInWithPopup, sendPasswordResetEmail} from "firebase/auth";
 import { auth, googleProvider } from "../firebase";
 import SignupPage from "./SignUpPage";
-
-
+import ForgotPassword from "./ForgotPassword";
 
 function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [isSignup, setIsSignup] = useState(false);
-
+  const [forgotPassword, setForgotPassword] = useState(false);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -31,6 +30,9 @@ function LoginPage() {
 
    if (isSignup) {
     return <SignupPage onSwitchToLogin={() => setIsSignup(false)} />;
+  }
+    if (forgotPassword) {
+    return <ForgotPassword onSwitchToLogin={() => forgotPassword(false)} />;
   }
 
   return (
@@ -88,7 +90,7 @@ function LoginPage() {
             <span className=" text-white ">Sign Up</span>
           </button>
           </div>
-        <p class="mt-2 text-center text-sm text-indigo-400 hover:text-indigo-300 "> Forgot password?</p>
+        <p class="mt-2 text-center text-sm text-indigo-400 hover:text-indigo-300 " onClick={() => setForgotPassword(true)}>Forgot password?</p>
         
       </div>
     </div>
