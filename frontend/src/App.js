@@ -36,16 +36,16 @@ function App() {
       </div>
     </div> */}
 
-    <div className="pt-4 flex text-gray-100 rounded-3xl overflow-hidden mr-4">
+    <div className="pt-4 flex text-gray-100 rounded-3xl overflow-hidden mr-4 ">
 
-     <SideBar displayName={user.displayName} email={user.email} />
+     <SideBar displayName={user.displayName} email={user.email} photoURL={user.photoURL} />
       
       
         
         <Routes>
             <Route path="/" element={<Subscriptions />} />
             <Route path="/subscriptions" element={<Subscriptions />} />
-            <Route path="/dashboard" element={<Dashboard user={user} />} />
+            <Route path="/dashboard" element={<Dashboard />} />
           </Routes>
     
     </div>
