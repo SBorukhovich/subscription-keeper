@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useAuth } from "./AuthContext";
 
+const API_URL = process.env.REACT_APP_API_URL
 
 function AddSubscriptionForm({onAdd}) {
   const { user } = useAuth();
@@ -13,7 +14,7 @@ function AddSubscriptionForm({onAdd}) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("http://127.0.0.1:8000/subscriptions", {
+      const response = await fetch(`${API_URL}/subscriptions`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

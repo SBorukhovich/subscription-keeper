@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
 
+const API_URL = process.env.REACT_APP_API_URL
+
 // Fetch all subscriptions for a user
 async function getData(userId) {
-  const res = await fetch(`http://127.0.0.1:8000/subscriptions/${userId}`);
+  const res = await fetch(`${API_URL}/subscriptions/${userId}`);
   if (!res.ok) throw new Error(`Failed to fetch subscriptions: ${res.status}`);
   const data = await res.json();
   return data; // array of subscription objects

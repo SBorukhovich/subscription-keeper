@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import SubscriptionDetails from "./SubscriptionDetails";
 import { useAuth } from "./AuthContext";
 
+const API_URL = process.env.REACT_APP_API_URL
 
 function SubscriptionList({refresh}) {
   const { user } = useAuth();
@@ -42,7 +43,7 @@ function SubscriptionList({refresh}) {
 
     try {
       // Update subscription with new renewal date
-      const response = await fetch(`http://127.0.0.1:8000/subscriptions/${sub.id}`, {
+      const response = await fetch(`${API_URL}/subscriptions/${sub.id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -67,7 +68,7 @@ function SubscriptionList({refresh}) {
 
   const fetchSubscriptions = async () => {
     try {
-      const response = await fetch(`http://127.0.0.1:8000/subscriptions/${user.uid}`);
+      const response = await fetch(`${API_URL}/subscriptions/${user.uid}`);
       const data = await response.json();
 
       // Check and auto-renew overdue automatic subscriptions
@@ -105,13 +106,13 @@ function SubscriptionList({refresh}) {
   }, [refresh]); // re-fetch when new sub is added
 
   const handleDelete = async (id) => {
-    await fetch(`http://127.0.0.1:8000/subscriptions/delete/${id}?user_id=${user.uid}`, {method: "DELETE",});
+    await fetch(`${API_URL}/subscriptions/delete/${id}?user_id=${user.uid}`, {method: "DELETE",});
     setSelectedSub(null);
     fetchSubscriptions();
   };
 
   const handleEdit = async (updatedSub) => {
-    await fetch(`http://127.0.0.1:8000/subscriptions/${updatedSub.id}`, {
+    await fetch(`${API_URL}/subscriptions/${updatedSub.id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(updatedSub),
