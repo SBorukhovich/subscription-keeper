@@ -32,25 +32,10 @@ export default function SideBar(user) {
         <h1 className="text-3xl font-bold text-[#bbf451] ">Subscription Keeper</h1>
       </p>
           <div className="pt-15 flex flex-col items-start space-y-3">
-            {/* Profile image */}
-            {user?.photoURL && (
-              <div className="w-14 h-14 rounded-xl overflow-hidden mb-2">
-                <img
-                  src={user.photoURL}
-                  alt="User profile"
-                  className="w-14 h-14 rounded-xl object-cover"
-                />
-              </div>
-            )}
             <div>
             {/* Display name */}
             {user?.displayName && (
               <h2 className="font-semibold text-lg">{user.displayName}</h2>
-            )}
-
-            {/* Email (always shown if available) */}
-            {user?.email && (
-              <p className="text-sm text-gray-400">{user.email}</p>
             )}
           </div>
           </div>
