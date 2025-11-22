@@ -89,7 +89,15 @@ def update_subscription(subscription_id: int, updated_data: Subscription):
             existing.renewal_date = updated_data.renewal_date
         if updated_data.color:
             existing.color = updated_data.color
-
+        if updated_data.automatic_renewal:
+            existing.automatic_renewal = updated_data.automatic_renewal
+        if updated_data.isMonthly:
+            existing.isMonthly = updated_data.isMonthly
+        if updated_data.isYearly:
+            existing.isYearly = updated_data.isYearly
+        if updated_data.notes is not None:
+            existing.notes = updated_data.notes 
+            
         session.add(existing)
         session.commit()
         session.refresh(existing)

@@ -9,9 +9,13 @@ async function getData(userId) {
   return data; // array of subscription objects
 }
 
-// Calculate total from subscription data
+// Calculate monthly total from subscription data
 function getTotal(subscriptions) {
-  const sum = subscriptions.reduce((acc, sub) => acc + (Number(sub.price) || 0), 0);
+  const sum = subscriptions.reduce((acc, sub) => {
+    const price = Number(sub.price) || 0;
+    // Monthly stays as is, convert annual to monthly
+    return acc + (sub.isMonthly ? price : price / 12);
+  }, 0);
   return Number(sum.toFixed(2));
 }
 
@@ -33,15 +37,20 @@ export default function DashboardStatistic({ user }) {
         const subs = await getData(user.uid);
         if (ignore) return;
 
-        // Map subscriptions to pie chart data
-        const chartData = subs.map((sub) => ({
-          name: sub.name,
-          value: Number(sub.price) || 0,
-          color: sub.color || "#9CA3AF",
-        }));
+        // Map subscriptions to pie chart data (using monthly equivalent prices)
+        const chartData = subs.map((sub) => {
+          const price = Number(sub.price) || 0;
+          const monthlyValue = sub.isMonthly ? price : price / 12;
+
+          return {
+            name: sub.name,
+            value: Number(monthlyValue.toFixed(2)),
+            color: sub.color || "#9CA3AF",
+          };
+        });
 
         setData(chartData);
-        setTotal(getTotal(subs));
+        setTotal(getTotal(subs)); // This now returns monthly total
       } catch (e) {
         console.error("Failed to fetch subscriptions:", e);
         if (!ignore) {
@@ -58,8 +67,7 @@ export default function DashboardStatistic({ user }) {
 
   return (
     <div>
-      <p className="text-2xl font-semibold text-black">
-        Total</p>
+      <p className="text-2xl font-semibold text-black">Monthly Total</p>
       <p className="text-2xl font-bold text-gray-800 my-4">
         {total === null ? "Loading..." : `$${total}`}
       </p>
