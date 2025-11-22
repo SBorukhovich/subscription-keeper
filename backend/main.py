@@ -19,14 +19,10 @@ app.add_middleware(
 # ----------- Database setup -----------
 load_dotenv()
 
-MYSQL_USER = os.getenv("MYSQL_USER")
-MYSQL_PASSWORD = os.getenv("MYSQL_PASSWORD")
-MYSQL_HOST = os.getenv("MYSQL_HOST")
-MYSQL_PORT = os.getenv("MYSQL_PORT")
-MYSQL_DB = os.getenv("MYSQL_DB")
+engine = create_engine(os.getenv("DATABASE_URL"), echo=True)
+DATABASE_URL = os.getenv("DATABASE_URL")
 
-DATABASE_URL = f"mysql+pymysql://{MYSQL_USER}:{MYSQL_PASSWORD}@{MYSQL_HOST}:{MYSQL_PORT}/{MYSQL_DB}"
-engine = create_engine(DATABASE_URL, echo=True)
+DATABASE_URL = DATABASE_URL
 
 
 class Subscription(SQLModel, table=True):
