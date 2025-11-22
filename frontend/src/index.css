@@ -12,3 +12,13 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/* Disable Brave/Chrome hover highlight */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button, a {
+  outline: none;
+  -webkit-appearance: none;
+}
