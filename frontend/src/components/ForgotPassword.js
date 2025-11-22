@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { getAuth, sendPasswordResetEmail } from "firebase/auth";
-import { app } from "../firebase";
 import LoginPage from "./LoginPage"; // adjust the path if needed
 
 const ForgotPassword = () => {

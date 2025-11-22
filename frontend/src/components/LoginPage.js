@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { signInWithEmailAndPassword, signInWithPopup, sendPasswordResetEmail} from "firebase/auth";
+import { signInWithEmailAndPassword, signInWithPopup} from "firebase/auth";
 import { auth, googleProvider } from "../firebase";
 import SignupPage from "./SignUpPage";
 import ForgotPassword from "./ForgotPassword";
