@@ -18,7 +18,17 @@ code {
   -webkit-tap-highlight-color: transparent;
 }
 
+
+* {
+  -webkit-tap-highlight-color: transparent; 
+}
+
 button, a {
-  outline: none;
-  -webkit-appearance: none;
+  -webkit-appearance: none; 
+  outline: none; 
+  -webkit-user-select: none; 
+}
+
+:focus {
+  outline: none !important;
 }
