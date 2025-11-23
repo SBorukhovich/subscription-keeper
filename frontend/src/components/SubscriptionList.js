@@ -173,12 +173,16 @@ function SubscriptionList({refresh}) {
                   {getBadge(sub.renewal_date)}
                 </p>
               </div>
-            </div>
-
+            </div>            
             <div className="text-right">
               <p className="text-lg font-semibold text-gray-700">
                 ${sub.price}
               </p>
+              {!sub.isMonthly && (
+                <p className="text-sm text-gray-500">
+                  ${(sub.price / 12).toFixed(2)}/mo
+                </p>
+              )}
             </div>
           </li>
         ))}
