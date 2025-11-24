@@ -3,10 +3,12 @@
 Subscription Keeper is a full-stack web application that helps users track all recurring subscriptions in one place. It simplifies personal budgeting by allowing users to manage renewal cycles, pricing, billing frequency, and notes—all through a clean, intuitive dashboard. A one place to track all of your subscriptions. 
 
 <img width="1468" height="802" alt="SK_example" src="https://github.com/user-attachments/assets/dbe41407-360b-4159-87d2-85542f7fa0b9" />
+<img width="1466" height="802" alt="Screenshot 2025-11-23 at 19 05 01" src="https://github.com/user-attachments/assets/258e1a46-b45f-4464-8cee-55c40aff0390" />
 
 ## Try it
 
 [Subscription Keeper](https://subscription-keeper.vercel.app/)
+
 
 To get started just sign up or log in using your Google account and start adding your subscriptions.
 
