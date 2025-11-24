@@ -890,27 +890,6 @@
       max-width: var(--container-sm);
     }
   }
-  .dark\:bg-purple-600 {
-    @media (prefers-color-scheme: dark) {
-      background-color: var(--color-purple-600);
-    }
-  }
-  .dark\:hover\:bg-purple-700 {
-    @media (prefers-color-scheme: dark) {
-      &:hover {
-        @media (hover: hover) {
-          background-color: var(--color-purple-700);
-        }
-      }
-    }
-  }
-  .dark\:focus\:ring-purple-900 {
-    @media (prefers-color-scheme: dark) {
-      &:focus {
-        --tw-ring-color: var(--color-purple-900);
-      }
-    }
-  }
 }
 @property --tw-scale-x {
   syntax: "*";

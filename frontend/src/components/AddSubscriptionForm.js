@@ -149,7 +149,7 @@ function AddSubscriptionForm({onAdd}) {
           class="w-10 h-10  cursor-pointer "
         />
       </div>
-      <button type="submit" class="p-0 mx-30 focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">
+      <button type="submit" class="p-0 mx-30 focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg px-5 py-2.5 mb-2">
         Add</button>
     </div>
     </form>
