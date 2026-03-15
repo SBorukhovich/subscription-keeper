@@ -33,7 +33,7 @@ To get started just sign up or log in using your Google account and start adding
 - SQLAlchemy ORM
 
 **Database**
-- MySQL (Filess.io)
+- MySQL (AWS)
 
 **Deployment**
 - Vercel (Frontend)
