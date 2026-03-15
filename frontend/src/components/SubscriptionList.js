@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import SubscriptionDetails from "./SubscriptionDetails";
 import { useAuth } from "./AuthContext";
 
@@ -19,7 +19,7 @@ function SubscriptionList({refresh}) {
   };
 
   // Auto-renew subscription if automatic and overdue
-  const checkRenewalDate = async (sub) => {
+  const checkRenewalDate = useCallback(async (sub) => {
     if (!sub.automatic_renewal || !isOverdue(sub.renewal_date)) {
       return sub; // no change needed
     }
@@ -39,7 +39,7 @@ function SubscriptionList({refresh}) {
     }
 
     // Format as YYYY-MM-DD for backend
-    const nextDateString = nextDate.toISOString().split('T')[0];
+    const nextDateString = nextDate.toISOString().split("T")[0];
 
     try {
       // Update subscription with new renewal date
@@ -64,16 +64,18 @@ function SubscriptionList({refresh}) {
       console.error("Error auto-renewing subscription:", error);
       return sub;
     }
-  };
+  }, []);
 
-  const fetchSubscriptions = async () => {
+  const fetchSubscriptions = useCallback(async () => {
+    if (!user?.uid) return;
+
     try {
       const response = await fetch(`${API_URL}/subscriptions/${user.uid}`);
       const data = await response.json();
 
       // Check and auto-renew overdue automatic subscriptions
       const renewedData = await Promise.all(
-        data.map(sub => checkRenewalDate(sub))
+        data.map((sub) => checkRenewalDate(sub))
       );
 
       const today = new Date();
@@ -89,8 +91,8 @@ function SubscriptionList({refresh}) {
         const isOverdueA = dateA < today;
         const isOverdueB = dateB < today;
 
-        if (isOverdueA && !isOverdueB) return -1; // a overdue → goes first
-        if (!isOverdueA && isOverdueB) return 1;  // b overdue → goes first
+        if (isOverdueA && !isOverdueB) return -1;
+        if (!isOverdueA && isOverdueB) return 1;
 
         return dateA - dateB;
       });
@@ -99,11 +101,11 @@ function SubscriptionList({refresh}) {
     } catch (error) {
       console.error("Failed to fetch:", error);
     }
-  };
+  }, [user?.uid, checkRenewalDate]);
 
   useEffect(() => {
     fetchSubscriptions();
-  }, [refresh]); // re-fetch when new sub is added
+  }, [refresh, fetchSubscriptions]); // re-fetch when new sub is added
 
   const handleDelete = async (id) => {
     await fetch(`${API_URL}/subscriptions/delete/${id}?user_id=${user.uid}`, {method: "DELETE",});
@@ -128,19 +130,22 @@ function SubscriptionList({refresh}) {
 
     if (diffDays < 0) {
       return (
-        <span className="ml-4 bg-red-500 text-white text-xs font-semibold px-2 py-1 rounded-full">
+        <span className="ml-4 bg-red-500 text-white text-xs font-semibold px-2 py-1 rounded-[9999px]"
+        >
           Overdue
         </span>
       );
     } else if (diffDays <= 5 && diffDays > 1) {
       return (
-        <span className="ml-4 bg-yellow-400 text-black text-xs font-semibold px-2 py-1 rounded-full">
+        <span className="ml-4 bg-yellow-400 text-black text-xs font-semibold px-2 py-1 rounded-[9999px]"
+        >
           {` ${diffDays} days` }
         </span>
       );
     } else if (diffDays <= 1) {
       return (
-        <span className="ml-4 bg-yellow-400 text-black text-xs font-semibold px-2 py-1 rounded-full">
+        <span className="ml-4 bg-yellow-400 text-black text-xs font-semibold px-2 py-1 rounded-[9999px]"
+        >
           {"1 day"}
         </span>
       );
@@ -159,7 +164,7 @@ function SubscriptionList({refresh}) {
             <div className="flex items-center gap-3">
               {/* Color TAG */}
               <div
-                className="w-9 h-9 rounded-full"
+                className="w-9 h-9 rounded-[9999px]"
                 style={{ backgroundColor: sub.color || "#9CA3AF" }} // default gray
               ></div>
 
