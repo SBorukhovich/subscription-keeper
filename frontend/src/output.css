@@ -23,7 +23,6 @@
     --color-purple-600: oklch(55.8% 0.288 302.321);
     --color-purple-700: oklch(49.6% 0.265 301.924);
     --color-purple-800: oklch(43.8% 0.218 303.724);
-    --color-purple-900: oklch(38.1% 0.176 304.987);
     --color-slate-600: oklch(44.6% 0.043 257.281);
     --color-gray-50: oklch(98.5% 0.002 247.839);
     --color-gray-100: oklch(96.7% 0.003 264.542);
@@ -470,8 +469,8 @@
   .rounded-3xl {
     border-radius: var(--radius-3xl);
   }
-  .rounded-full {
-    border-radius: calc(infinity * 1px);
+  .rounded-\[9999px\] {
+    border-radius: 9999px;
   }
   .rounded-lg {
     border-radius: var(--radius-lg);
